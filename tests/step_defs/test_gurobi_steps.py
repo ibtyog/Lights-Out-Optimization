@@ -10,7 +10,7 @@ scenarios("../features/gurobi_solver.feature")
 
 @pytest.fixture
 def context():
-    """Słownik do przekazywania stanu między krokami testu."""
+    """Dict to pass data between steps."""
     return {}
 
 
