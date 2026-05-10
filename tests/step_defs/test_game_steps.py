@@ -9,6 +9,7 @@ scenarios("../features/game_engine.feature")
 
 @pytest.fixture
 def context():
+    """Dict to pass data between steps."""
     return {}
 
 
