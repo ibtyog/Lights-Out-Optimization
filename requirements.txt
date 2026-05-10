@@ -1,0 +1,6 @@
+gurobipy==11.0.1      # Solver matematyczny
+requests==2.31.0      # Do pobierania HTML dla scrapera
+beautifulsoup4==4.12.3 # Do parsowania HTML (jeśli się przyda)
+matplotlib==3.8.4     # Do rysowania wykresów
+pytest==8.1.1         # Środowisko testowe
+pytest-bdd==7.1.2     # Wtyczka do Behavior-Driven Development
