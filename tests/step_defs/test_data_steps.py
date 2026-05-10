@@ -3,6 +3,7 @@ import pytest
 from pytest_bdd import scenarios, given, when, then, parsers
 from src.data_module.scraper import Scraper
 from src.data_module.file_manager import FileManager
+from src.data_module.input_parser import InputParser
 
 scenarios("../features/data_processing.feature")
 
@@ -42,5 +43,26 @@ def check_file_save(context, filename):
 
     assert os.path.exists(fm.filepath)
 
+    loaded_matrix = fm.load_board(board_id)
+    assert loaded_matrix == context["board"].initial_state
+
+
+@given(parsers.parse('user provides a string "{board_string}"'))
+def manual_input(context, board_string):
+    context["raw_input"] = board_string
+
+
+@when("system parses the string into a matrix")
+def parse_manual_input(context):
+    context["board"] = InputParser.parse_string(context["raw_input"])
+
+
+@then(parsers.parse('file manager stores manual board to "{filename}"'))
+def store_manual_board(context, filename):
+    fm = FileManager(filepath=f"data/{filename}")
+
+    board_id = fm.save_board(context["board"])
+
+    assert os.path.exists(fm.filepath)
     loaded_matrix = fm.load_board(board_id)
     assert loaded_matrix == context["board"].initial_state
